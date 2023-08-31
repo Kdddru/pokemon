@@ -1,0 +1,21 @@
+$Basic_border : 3px solid black;
+
+.home{
+  top: 30px;
+  position: relative;
+  background-color: lightblue;
+  width: 70%;
+  min-height: 80vh;
+  margin: auto;
+  border: $Basic_border;
+  border-radius: 5px;
+}
+
+//header
+
+.header{
+  background-color: tomato;
+  border-bottom: $Basic_border;
+  padding: 10px;
+  border-radius: 2px;
+}
