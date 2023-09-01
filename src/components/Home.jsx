@@ -1,9 +1,8 @@
 import style from './home.module.scss'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { useDispatch, useSelector } from 'react-redux';
-import { getPokemon } from '../Store/pokemonSlice';
+import { useSelector } from 'react-redux';
 import Card from '../layout/Card';
 
 
@@ -19,12 +18,7 @@ const Header = () =>{
 
 
 const Body = () =>{
-  const dispatch = useDispatch();
   const pokemons = useSelector(({pokemons})=>pokemons.koNames);
-  
-  useEffect(()=>{
-    dispatch(getPokemon());
-  },[])
 
   return(
     <div>
