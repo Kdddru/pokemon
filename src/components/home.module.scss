@@ -18,4 +18,13 @@ $Basic_border : 3px solid black;
   border-bottom: $Basic_border;
   padding: 10px;
   border-radius: 2px;
+  height: 100px;
+}
+
+.pokemonList{
+  li{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+  }
 }

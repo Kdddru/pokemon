@@ -1,9 +1,9 @@
 import style from './home.module.scss'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useSelector } from 'react-redux';
-import Card from '../layout/Card';
+import List from '../layout/List';
 
 
 
@@ -18,13 +18,29 @@ const Header = () =>{
 
 
 const Body = () =>{
-  const pokemons = useSelector(({pokemons})=>pokemons.koNames);
+
+  const Data = useSelector(({pokemons})=>pokemons);
+  const [pokemonData,setPokemonData] = useState([]);
+  const pokemons = pokemonData && pokemonData.map((pokemon,i)=>(
+    {
+      id : i+1,
+      name : pokemon,
+      img : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`
+    }
+  ))
+
+  useEffect(()=>{
+    setPokemonData(Data.pokemons);
+  },[Data]);
+  
 
   return(
     <div>
-      {pokemons && pokemons.map((pokemon,i)=>(
-        <Card key={i} pokemon={pokemon}/>
-      ))}
+      <ul className={style.pokemonList}>
+        {pokemons && pokemons.map((pokemon,i)=>(
+          <List key={i} pokemon = {pokemon}/>
+        ))}
+      </ul>
     </div>
   );
 }
