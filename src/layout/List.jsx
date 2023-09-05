@@ -7,7 +7,7 @@ export default function List(props) {
   return (
     <li>
       {pokemon.id}
-      <img src={pokemon.img} alt='사진' width={70} height={70}/>
+      <img src={pokemon.img} alt='사진' width={60} height={60}/>
       <span>{pokemon.name}</span>
     </li>
   )
