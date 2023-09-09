@@ -11,6 +11,7 @@ import List from '../layout/List';
 const Header = () =>{
   return(
     <div className={style.header}>
+      {/**버튼 */}
       <div className={style.botton}
       style={{
         bottom: '-3px',
@@ -19,14 +20,15 @@ const Header = () =>{
         borderRadius: '100px 100px 0 0'
       }}>
       </div>
+      {/**버튼 끝*/}
     </div>
   );
 }
 
 //main
 const Main = () =>{
-
   const Data = useSelector(({pokemons})=>pokemons);
+  console.log(Data);
   const pokemonNames = Data.pokemons
   const pokemons = pokemonNames && pokemonNames.map((pokemon,i)=>(
     {
@@ -38,11 +40,18 @@ const Main = () =>{
   
 
   return(
+    <div className={style.main}>
       <ul className={style.pokemonList}>
-        {pokemons && pokemons.map((pokemon,i)=>(
-          <List key={i} pokemon = {pokemon}/>
-        ))}
+      {
+        Data && Data.status === 'Complite' ?
+          pokemons && pokemons.map((pokemon,i)=>(
+            <List key={i} pokemon = {pokemon}/>
+          ))
+          :
+          <p>Loading....</p>
+        }
       </ul>
+    </div>
   );
 }
 

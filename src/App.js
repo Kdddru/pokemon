@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getPokemon } from './Store/pokemonSlice';
 
 import Home from './components/Home';
+import Modal from './components/Modal';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
     <div>
       <Routes>
         <Route index element={<Home/>}/>
+        <Route path='/pokemon/:id' element={<Modal/>}/>
       </Routes>
     </div>
   );

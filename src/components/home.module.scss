@@ -15,25 +15,50 @@ $Basic_border : 3px solid black;
 
 .header{
   position: relative;
-  background-color: tomato;
+  background-color: red;
   border-bottom: $Basic_border;
   border-top-left-radius: 2px;
   height: 100px;
 }
 
 //main
+.main{
+    padding: 60px 0 60px 0;
+    .pokemonList{
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+    background-color: aliceblue;
+    border: 2px solid black;
+    height: 70vh;
+    overflow-y: scroll;
+    
+    //list
+    li{
+      width: 95%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      font-size: 1.6rem;
+      height: 60px;
+      &:hover{
+        border: 2px solid black;
+        opacity: 0.6;
+        cursor: pointer;
+      }
 
-.pokemonList{
-  height: 75vh;
-  overflow: scroll;
-  li{
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem;
+      img{
+        margin-left: 120px;
+      }
+      span{
+        margin-left: 170px;
+      }
+    }
+
+    &::-webkit-scrollbar{
+      display: none;
+    }
   }
-}
-.pokemonList::-webkit-scrollbar{
-  display: none;
 }
 
 .footer{

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 //포켓몬 마릿수 
-let num = 30;
+let num = 50;
 
 
 export const getPokemon = createAsyncThunk(
