@@ -2,9 +2,6 @@ import style from './home.module.scss'
 
 import React from 'react'
 
-import { useSelector } from 'react-redux';
-import List from '../layout/List';
-
 
 
 //header
@@ -27,29 +24,11 @@ const Header = () =>{
 
 //main
 const Main = () =>{
-  const Data = useSelector(({pokemons})=>pokemons);
-  console.log(Data);
-  const pokemonNames = Data.pokemons
-  const pokemons = pokemonNames && pokemonNames.map((pokemon,i)=>(
-    {
-      id : i+1,
-      name : pokemon,
-      img : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`
-    }
-  ))
   
 
   return(
     <div className={style.main}>
       <ul className={style.pokemonList}>
-      {
-        Data && Data.status === 'Complite' ?
-          pokemons && pokemons.map((pokemon,i)=>(
-            <List key={i} pokemon = {pokemon}/>
-          ))
-          :
-          <p>Loading....</p>
-        }
       </ul>
     </div>
   );
