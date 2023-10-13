@@ -1,6 +1,6 @@
 import style from './home.module.scss'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 
@@ -24,11 +24,39 @@ const Header = () =>{
 
 //main
 const Main = () =>{
-  
+  let [pokemons, setpokemons] = useState([]);
+
+  const getData = async() =>{
+
+    let api = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
+    let data = await api.json();
+    let pokemons = data.results;
+
+    const pokemonDatas = pokemons && pokemons.map((pokemon, index)=>({
+      id : index+1,
+      name : pokemon.name,
+      img : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`
+    }))
+
+    pokemonDatas && setpokemons(pokemonDatas);
+
+  }
+
+
+
+  useEffect(()=>{
+    getData();    
+  },[])
 
   return(
     <div className={style.main}>
       <ul className={style.pokemonList}>
+        {pokemons && pokemons.map((p)=>(
+          <li key={p.id}>
+            <img src={p.img} alt='이미지'/>
+            <p>{p.name}</p>
+          </li>
+        ))}
       </ul>
     </div>
   );
