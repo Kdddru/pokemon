@@ -24,11 +24,14 @@ const Header = () =>{
 
 //main
 const Main = () =>{
-  let [pokemons, setpokemons] = useState([]);
+  let num = 20
+  const [pokemons, setpokemons] = useState([]);
+  const [names, setNames] = useState();
 
   const getData = async() =>{
+    let url = `https://pokeapi.co/api/v2/pokemon?offset=0&limit= ${num}`;
 
-    let api = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
+    let api = await fetch(url);
     let data = await api.json();
     let pokemons = data.results;
 
@@ -41,20 +44,44 @@ const Main = () =>{
     pokemonDatas && setpokemons(pokemonDatas);
 
   }
+  
+  //한국이름 들고오기
+  const getKoreanName = () =>{
+    const pokemonKoreanNames = [];
+    const urls =[];
+    
+    for(let i=0; i<num; i++){
+      let url = `https://pokeapi.co/api/v2/pokemon-species/${i+1}`
+      urls.push(url);
+    }
+
+    let requests = urls.map((url)=> fetch(url));
+
+    Promise.all(requests)
+    .then((response)=>Promise.all(response.map((res)=>res.json())))
+    .then((results)=> {
+      for(let result of results){
+        pokemonKoreanNames.push(result.names[2].name);
+      }
+    })
+    
+    setNames(pokemonKoreanNames);
+  }
 
 
 
   useEffect(()=>{
-    getData();    
+    getKoreanName(); 
+    getData();
   },[])
 
   return(
     <div className={style.main}>
       <ul className={style.pokemonList}>
-        {pokemons && pokemons.map((p)=>(
+        {pokemons && pokemons.map((p,i)=>(
           <li key={p.id}>
             <img src={p.img} alt='이미지'/>
-            <p>{p.name}</p>
+            <span>{names && names[i]}</span>
           </li>
         ))}
       </ul>
