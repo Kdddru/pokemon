@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import style from './home.module.scss'
 
 import React, { useEffect, useState } from 'react'
@@ -24,10 +25,12 @@ const Header = () =>{
 
 //main
 const Main = () =>{
+  const navi = useNavigate();
   let num = 20
   const [pokemons, setpokemons] = useState([]);
   const [names, setNames] = useState();
 
+  //포켓몬 데이터 들고오기
   const getData = async() =>{
     let url = `https://pokeapi.co/api/v2/pokemon?offset=0&limit= ${num}`;
 
@@ -69,7 +72,7 @@ const Main = () =>{
   }
 
 
-
+  //실행시 포켓몬데이터, 포켓몬 한국이름 들고오기
   useEffect(()=>{
     getKoreanName(); 
     getData();
@@ -79,7 +82,16 @@ const Main = () =>{
     <div className={style.main}>
       <ul className={style.pokemonList}>
         {pokemons && pokemons.map((p,i)=>(
-          <li key={p.id}>
+          <li key={p.id} 
+          onClick={()=>{
+            navi(`/pokemon/${i}`,{state:{
+              id: p.id,
+              name : names[i],
+              img : p.img
+            }})
+          }}>
+
+            {p.id < 10 ? `00` + p.id : p.id<100 ? `0` + p.id : p.id }
             <img src={p.img} alt='이미지'/>
             <span>{names && names[i]}</span>
           </li>
@@ -109,7 +121,7 @@ const Footer = () =>{
 
 
 
-export default function Home() {
+const Home = () => {
   return (
     <div className={style.home}>
       <Header/>
@@ -118,3 +130,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Home

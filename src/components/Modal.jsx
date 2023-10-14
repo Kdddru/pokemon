@@ -8,19 +8,16 @@ export default function Modal(props) {
 
   
 
-  useEffect(()=>{
-    console.log(state)
-  },[pokemonId])
 
-
+  console.log(state)
 
 
 
 
   return (
     <div>
+      <img src={state.img} alt="이미지" />
       <p>{state.name}</p>
-      <img src={state.img} alt='사진'/>
     </div>
   )
 }
