@@ -26,7 +26,7 @@ const Header = () =>{
 //main
 const Main = () =>{
   const navi = useNavigate();
-  let num = 20
+  let [num, setNum] = useState(20);
   const [pokemons, setpokemons] = useState([]);
   const [names, setNames] = useState();
 
@@ -49,7 +49,7 @@ const Main = () =>{
   }
   
   //한국이름 들고오기
-  const getKoreanName = () =>{
+  const getKoreanName = async() =>{
     const pokemonKoreanNames = [];
     const urls =[];
     
@@ -60,7 +60,7 @@ const Main = () =>{
 
     let requests = urls.map((url)=> fetch(url));
 
-    Promise.all(requests)
+    await Promise.all(requests)
     .then((response)=>Promise.all(response.map((res)=>res.json())))
     .then((results)=> {
       for(let result of results){
@@ -74,9 +74,12 @@ const Main = () =>{
 
   //실행시 포켓몬데이터, 포켓몬 한국이름 들고오기
   useEffect(()=>{
-    getKoreanName(); 
     getData();
-  },[])
+    getKoreanName(); 
+  },[num])
+
+
+  console.log(num)
 
   return(
     <div className={style.main}>
@@ -84,10 +87,10 @@ const Main = () =>{
         {pokemons && pokemons.map((p,i)=>(
           <li key={p.id} 
           onClick={()=>{
-            navi(`/pokemon/${i}`,{state:{
+            navi(`/pokemon/${i+1}`,{state:{
               id: p.id,
               name : names[i],
-              img : p.img
+              img : p.img,
             }})
           }}>
 
@@ -97,6 +100,7 @@ const Main = () =>{
           </li>
         ))}
       </ul>
+      <p onClick={()=>{setNum(num+20)}}>+</p>
     </div>
   );
 }
