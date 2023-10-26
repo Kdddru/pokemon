@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import style from './home.module.scss'
 
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,19 +26,22 @@ const Header = () =>{
 
 //main
 const Main = () =>{
+  const navi = useNavigate();
   const {pokemon} = useSelector((state)=>state);
-  const pokemonInfo = pokemon && pokemon.name.map((p,i)=>({
-    id : i+1,
-    name : p,
-    img : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`
-  }));
+  
+
+  console.log(pokemon)
+
+  
 
   return(
     <div className={style.main}>
       <ul className={style.pokemonList}>
         {
-          pokemonInfo.map((p)=>(
-            <li key={p.id}>
+          pokemon && pokemon.map((p)=>(
+            <li key={p.id}
+            onClick={()=>{navi(`/pokemon/${p.id}`)}}
+            >
               {p.id < 10 ? `00` + p.id : p.id<100 ? `0` + p.id : p.id }
               <img src={p.img} alt="" />
               <span>{p.name}</span>

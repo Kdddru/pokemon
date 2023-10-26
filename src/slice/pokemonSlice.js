@@ -24,7 +24,11 @@ export const getPokemonName =createAsyncThunk(
       }
     })
 
-    return pokemonKoreanNames
+    return pokemonKoreanNames.map((p,i)=>({
+      id : i+1,
+      name : p,
+      img : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i+1}.png`
+    }))
   }
 )
 
@@ -32,12 +36,10 @@ export const getPokemonName =createAsyncThunk(
 
 const pokemonSlice = createSlice({
   name : 'pokemon',
-  initialState:{
-    name : []
-  },
+  initialState: [],
   extraReducers: (builder) =>{
     builder.addCase(getPokemonName.fulfilled,(state,action)=>{
-      state.name = action.payload
+      return action.payload
     })
   }
 })

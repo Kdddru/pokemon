@@ -1,18 +1,26 @@
-import React, { useEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import style from './modal.module.scss'
-
 
 
 const PrevBtn = (props) => {
   const navi = useNavigate();
-  let {id} = props.id
+  const {id} = useParams();
+  
 
+  const prev = () =>{
+    if(id>1){
+      navi(`/pokemon/${id-1}`)
+    }
+    else{
+      alert(`첫번째 페이지입니다`)
+    }
+  }
   
 
   return(
     <div className={style.btn}
-    onClick={()=>{navi(`/pokemon/${Number(id)-1}`)}}
+      onClick={prev}
     >
       prevBtn
     </div>
@@ -20,21 +28,16 @@ const PrevBtn = (props) => {
 }
 
 const InfoStatus = () =>{
-  const {state} = useLocation();
-
-  console.log(state)
 
   return(
     <div className={style.info}>
-      <p>{state.id}</p>
-      <p>{state.name}</p>
     </div>
   )
 } 
 
-const NextBtn = (props) =>{
+const NextBtn = () =>{
   const navi = useNavigate();
-  let {id} = props.id
+  const {id} = useParams();
 
   return(
     <div className={style.btn}
@@ -48,14 +51,12 @@ const NextBtn = (props) =>{
 
 
 const Modal = () => {
-  const pokemonId = useParams();
-
 
   return (
     <div className={style.modal}>
-      <PrevBtn id={pokemonId}/>
+      <PrevBtn/>
       <InfoStatus/>
-      <NextBtn id={pokemonId}/>
+      <NextBtn/>
     </div>
   )
 }
