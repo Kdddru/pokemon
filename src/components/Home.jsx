@@ -30,10 +30,6 @@ const Main = () =>{
   const {pokemon} = useSelector((state)=>state);
   
 
-  console.log(pokemon)
-
-  
-
   return(
     <div className={style.main}>
       <ul className={style.pokemonList}>
