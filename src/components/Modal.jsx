@@ -63,8 +63,6 @@ const InfoStatus = () =>{
       types: types
     })
   }
-
-
   
 
 
@@ -80,30 +78,44 @@ const InfoStatus = () =>{
 
   return(
     <div className={style.info}>
-      {
-        pokemonInfo1 && 
-        <div>
-          <img src={pokemonInfo1.img} alt="이미지" />
-          <p>{pokemonInfo1.name}</p>
-        </div>
-      }
-      {
-        pokemonInfo2 && 
-        <div className={style.type}>
-          <ul>
-            {
-              pokemonInfo2.types.map((type,i)=>(
-              <li key={i} className={type}>{type}</li>
-            ))
-            }
-          </ul>
-          <p>{pokemonInfo2.height}</p>
-          <p>{pokemonInfo2.weight}</p>
-        </div>
-      }
+      {/**header */}
+      <div className={style.header}>header</div>
+
+      {/** main */}
+      <div className={style.main}>
+        {/** 포켓몬 기본데이터 */}
+        {
+          pokemonInfo1 && 
+          <div>
+            <p>No.{id<10 ? `00${id}`: id<100 ? `0${id}` : id}</p>
+            <img src={pokemonInfo1.img} alt="이미지" />
+            <p>{pokemonInfo1.name}</p>
+          </div>
+        }
+
+        {/**포켓몬 상세 데이터 */}
+        {
+          pokemonInfo2 && 
+          <div>
+            <ul className={style.type}>
+              {
+                pokemonInfo2.types.map((type,i)=>(
+                <li key={i} className={type}>{type}</li>
+              ))
+              }
+            </ul>
+            <p>{(pokemonInfo2.height*0.1).toFixed(2)}m</p>
+            <p>{(pokemonInfo2.weight*0.1).toFixed(2)}kg</p>
+          </div>
+        }
+      </div>
+      
+      {/**buttom */}
+      <div className={style.bottom}>bottom</div>
     </div>
   )
 } 
+
 
 const NextBtn = () =>{
   const navi = useNavigate();

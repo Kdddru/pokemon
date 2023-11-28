@@ -39,7 +39,7 @@ const Main = () =>{
             onClick={()=>{navi(`/pokemon/${p.id}`)}}
             >
               {p.id < 10 ? `00` + p.id : p.id<100 ? `0` + p.id : p.id }
-              <img src={p.img} alt="" />
+              <img src={p.img} alt="이미지" />
               <span>{p.name}</span>
             </li>
           ))

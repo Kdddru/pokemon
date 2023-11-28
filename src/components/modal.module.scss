@@ -2,13 +2,61 @@
   display: flex;
   height: 100vh;
 
-  .btn{
-    width: 10%;
-    background-color: lightgrey;
-  }
 
-  .info{
-    width: 80%;
-    text-align: center;
+//왼쪽 오른쪽 버튼
+  .btn{
+    min-width: 180px;
+    width: 25%;
+    background-color: lightgrey;
+    &:hover{
+      opacity: 0.6;
+    }
   }
+  .info{
+    min-width: 440px;
+    width: 50%;
+    text-align: center;
+    position: relative;
+    
+    .header{
+      position: relative;
+      top: 0%;
+      width: 100%;
+      background-color: red;
+      height: 5vh;
+      max-height: 70px;
+    }
+    .main{
+      
+      img{
+        width: 100px;
+      }
+  
+      .type{
+        display: flex;
+        min-width: 380px;
+        width: 35%;
+        justify-content: space-around;
+        margin: auto;
+  
+        
+        li{
+          min-width: 150px;
+          color: white;
+          padding: 5px;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .bottom{
+      position: absolute;
+      bottom: 0%;
+      width: 100%;
+      background-color: red;
+      height: 5vh;
+      max-height: 70px;
+    }
+  }
+  
 }
