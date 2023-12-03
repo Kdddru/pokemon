@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 
-export let num = 20
+export let num = 150
 
 
 export const getPokemonName =createAsyncThunk(

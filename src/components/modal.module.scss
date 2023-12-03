@@ -31,22 +31,37 @@
       img{
         width: 100px;
       }
-  
-      .type{
+      .list{
         display: flex;
         min-width: 380px;
-        width: 35%;
-        justify-content: space-around;
-        margin: auto;
-  
+        width: 100%;
         
-        li{
-          min-width: 150px;
-          color: white;
-          padding: 5px;
-          border-radius: 5px;
+        span{
+          width: 10%;
+        }
+        .type, .abilities{
+          display: flex;
+          justify-content: center;
+          width: 80%;
+        }
+        
+        .type{
+          li{
+            width: 132px;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+          }
+        }
+  
+        .abilities{
+          li{
+            width: 132px;
+            
+          }
         }
       }
+
     }
 
     .bottom{

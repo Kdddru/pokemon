@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import style from './modal.module.scss'
 import { useSelector } from 'react-redux';
+import style from './modal.module.scss'
+
 
 
 const PrevBtn = () => {
@@ -14,7 +15,7 @@ const PrevBtn = () => {
       setTimeout(()=> navi(`/pokemon/${id-1}`),100);
     }
     else{
-      alert(`첫번째 페이지입니다`)
+      alert(`첫번째 페이지입니다`);
     }
   }
   
@@ -45,7 +46,7 @@ const InfoStatus = () =>{
 
     //타입 데이터 들고오기
     const typeData = await data.types
-    let typesUrl = typeData.map((t)=>fetch(t.type.url)) 
+    let typesUrl = typeData.map((t)=>fetch(t.type.url)); 
 
 
     //최종 types
@@ -53,6 +54,12 @@ const InfoStatus = () =>{
     .then((response)=>Promise.all(response.map((res)=>res.json())))
     .then((result)=>result.map((r)=>r.names[1].name))
 
+    const abilityData = await data.abilities
+    let abilityUrl = abilityData.map((a)=>fetch(a.ability.url));
+
+    const abilities = await Promise.all(abilityUrl)
+    .then((response)=>Promise.all(response.map((res)=>res.json())))
+    .then((result)=>result.map((r)=>r.names[1].name))
     
     console.log(data)
 
@@ -60,7 +67,8 @@ const InfoStatus = () =>{
     setPokemonInfo2({
       height : data.height,
       weight : data.weight,
-      types: types
+      types: types,
+      abilities : abilities
     })
   }
   
@@ -71,10 +79,6 @@ const InfoStatus = () =>{
     setPokemonInfo1(pokemon[id-1]);
     getData();
   },[pokemon,id])
-
-  console.log(pokemonInfo1)
-  console.log(pokemonInfo2)
-
 
   return(
     <div className={style.info}>
@@ -97,12 +101,25 @@ const InfoStatus = () =>{
         {
           pokemonInfo2 && 
           <div>
-            <ul className={style.type}>
-              {
-                pokemonInfo2.types.map((type,i)=>(
-                <li key={i} className={type}>{type}</li>
-              ))
-              }
+            {/** 타입 데이터 */}
+            <ul className={style.list}>
+              <span>타입</span>
+              <ul className={style.type}>
+                {
+                  pokemonInfo2.types.map((type,i)=>(
+                  <li key={i} className={type}>{type}</li>
+                ))
+                }
+              </ul>
+            </ul>
+            {/** 특성 데이터 */}
+            <ul className={style.list}>
+              <span>특성</span>
+              <ul className={style.abilities}> 
+                {
+                  pokemonInfo2.abilities.map((a,i)=><li key={i}><span>{a}</span></li>)
+                }
+              </ul>
             </ul>
             <p>{(pokemonInfo2.height*0.1).toFixed(2)}m</p>
             <p>{(pokemonInfo2.weight*0.1).toFixed(2)}kg</p>

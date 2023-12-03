@@ -8,12 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 //header
 const Header = () =>{
+
   return(
     <div className={style.header}>
       {/**버튼 */}
       <div className={style.botton}
       style={{
-        bottom: '-3px',
+        bottom: '-2.8px',
         transform:'translateY(0)',
         borderBottom:'none',
         borderRadius: '100px 100px 0 0'
@@ -56,7 +57,7 @@ const Footer = () =>{
       {/** 버튼 */}
       <div className={style.botton}
       style={{
-        top:'-3px',
+        top:'-3.2px',
         transform:'translateY(0)',
         borderTop:'none',
         borderRadius: '0 0 100px 100px'
