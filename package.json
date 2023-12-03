@@ -1,5 +1,4 @@
 {
-  "homepage": "https://kdddru.github.io/pokemon",
   "name": "pokemon",
   "version": "0.1.0",
   "private": true,
@@ -27,6 +26,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
+  "homepage": "https://kdddru.github.io/pokemon",
   "eslintConfig": {
     "extends": [
       "react-app",
