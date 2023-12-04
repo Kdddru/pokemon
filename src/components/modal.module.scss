@@ -23,14 +23,28 @@
       top: 0%;
       width: 100%;
       background-color: red;
-      height: 5vh;
+      height: 7vh;
       max-height: 70px;
     }
     .main{
-      
-      img{
-        width: 100px;
+      margin-top: 5%;
+
+      //포켓몬 기본 데이터
+      .no{
+        font-size: 1.5rem;
+        padding: 10px;
       }
+
+      img{
+        width: 170px;
+      }
+      .name{
+        font-size: 30px;
+        padding: 20px;        
+      }
+
+
+      //포켓몬 상세 데이터
       .list{
         display: flex;
         min-width: 380px;
@@ -51,13 +65,18 @@
             color: white;
             padding: 5px;
             border-radius: 5px;
+            &:nth-child(2){
+              margin-left: 10px;
+            }
           }
         }
   
         .abilities{
           li{
             width: 132px;
-            
+            &:nth-child(2){
+              margin-left: 10px;
+            }
           }
         }
       }
@@ -69,7 +88,7 @@
       bottom: 0%;
       width: 100%;
       background-color: red;
-      height: 5vh;
+      height: 7vh;
       max-height: 70px;
     }
   }

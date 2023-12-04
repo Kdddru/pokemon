@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import style from './home.module.scss'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { getPokemonName } from '../slice/pokemonSlice';
 
 
 
@@ -28,8 +29,10 @@ const Header = () =>{
 //main
 const Main = () =>{
   const navi = useNavigate();
+  const dispatch = useDispatch();
+
   const {pokemon} = useSelector((state)=>state);
-  
+
 
   return(
     <div className={style.main}>

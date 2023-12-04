@@ -32,7 +32,6 @@ const PrevBtn = () => {
 const InfoStatus = () =>{
   const [pokemonInfo1, setPokemonInfo1] = useState();
   const [pokemonInfo2, setPokemonInfo2] = useState();
-  
   const {id} = useParams();
   const {pokemon} = useSelector((state)=>state);
 
@@ -54,9 +53,11 @@ const InfoStatus = () =>{
     .then((response)=>Promise.all(response.map((res)=>res.json())))
     .then((result)=>result.map((r)=>r.names[1].name))
 
+    //특성 데이터 들고오기
     const abilityData = await data.abilities
     let abilityUrl = abilityData.map((a)=>fetch(a.ability.url));
 
+    //최종 특성 데이터
     const abilities = await Promise.all(abilityUrl)
     .then((response)=>Promise.all(response.map((res)=>res.json())))
     .then((result)=>result.map((r)=>r.names[1].name))
@@ -91,9 +92,11 @@ const InfoStatus = () =>{
         {
           pokemonInfo1 && 
           <div>
-            <p>No.{id<10 ? `00${id}`: id<100 ? `0${id}` : id}</p>
-            <img src={pokemonInfo1.img} alt="이미지" />
-            <p>{pokemonInfo1.name}</p>
+            <p className={style.no}>{id<10 ? `00${id}`: id<100 ? `0${id}` : id}</p>
+            <img 
+            src = {`https://data1.pokemonkorea.co.kr/newdata/pokedex/mid/${id<10 ? '000'+id : id<100 ? '00'+id : id<1000 ?'0' + id : id}01.png`} 
+            alt="이미지" />
+            <p className={style.name}>{pokemonInfo1.name}</p>
           </div>
         }
 
@@ -142,10 +145,10 @@ const NextBtn = () =>{
 
   const next = () => {
     if(id == pokemon.length){
-      alert('마지막 페이지입니다')
+      alert('마지막 페이지입니다');
     }
     else{
-      setTimeout(()=>navi(`/pokemon/${Number(id)+1}`),100)
+      setTimeout(()=>navi(`/pokemon/${Number(id)+1}`),100);
     }
   }
 
